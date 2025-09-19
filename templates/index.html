@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LibraNet</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>📚 LibraNet</h1>
+
+    <!-- Items Section -->
+    <section class="items">
+        <h2>Available Items</h2>
+        {% if items %}
+            <ul>
+                {% for item in items %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No items in library yet.</p>
+        {% endif %}
+    </section>
+
+    <!-- Add Item -->
+    <section class="actions">
+        <h2>Add Item</h2>
+        <form method="POST" action="{{ url_for('add_item') }}">
+            <input type="text" name="id" placeholder="ID" required>
+            <input type="text" name="title" placeholder="Title" required>
+            <input type="text" name="author" placeholder="Author" required>
+            <select name="type" required>
+                <option value="book">Book</option>
+                <option value="audio">AudioBook</option>
+                <option value="emag">EMagazine</option>
+            </select>
+            <input type="number" name="pages" placeholder="Pages (Book)">
+            <input type="number" name="minutes" placeholder="Minutes (AudioBook)">
+            <input type="number" name="issue" placeholder="Issue (EMag)">
+            <button type="submit">Add</button>
+        </form>
+
+        <!-- Borrow Item -->
+        <h2>Borrow Item</h2>
+        <form method="POST" action="{{ url_for('borrow_item') }}">
+            <input type="number" name="item_id" placeholder="Item ID" required>
+            <input type="number" name="user_id" placeholder="User ID" required>
+            <input type="text" name="duration" placeholder="5d / 48h / 1w" required>
+            <button type="submit">Borrow</button>
+        </form>
+
+        <!-- Return Item -->
+        <h2>Return Item</h2>
+        <form method="POST" action="{{ url_for('return_item') }}">
+            <input type="number" name="item_id" placeholder="Item ID" required>
+            <button type="submit">Return</button>
+        </form>
+    </section>
+
+    <!-- Fines -->
+    <section class="fines">
+        <h2>Fines</h2>
+        {% if fines %}
+            <ul>
+                {% for user, fine in fines.items() %}
+                    <li>User {{ user }}: ₹{{ fine }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No fines recorded yet.</p>
+        {% endif %}
+    </section>
+</body>
+</html>
