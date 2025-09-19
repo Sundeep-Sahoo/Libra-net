@@ -18,7 +18,7 @@ The system allows users to:
 
 The application supports two modes of use:
 
-Core Python Module (library_core.py) – can be run directly in terminal for quick operations.
+Core Python Module (library.py) – can be run directly in terminal for quick operations.
 
 Flask Web App (app.py) – provides a clean web-based interface for user interaction.
 
@@ -31,3 +31,4 @@ Strong error handling and validation
 Extensibility for future growth (like user authentication, search, and advanced analytics)
 
 Gentle, library-inspired UI with HTML + CSS + Flask
+
